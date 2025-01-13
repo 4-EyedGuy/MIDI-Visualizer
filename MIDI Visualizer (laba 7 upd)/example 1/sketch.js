@@ -10,18 +10,17 @@ function setup() {
 
     let loadButton = createButton('Upload MIDI');
     loadButton.position(15, 15);
-    loadButton.mousePressed(loadMidiFile);
+    loadButton.elt.addEventListener('click', loadMidiFile);
 
     let playButton = createButton('Play');
     playButton.position(15, 40);
-    playButton.mousePressed(togglePlay);
-
-    playButton.mouseOver(() => playButton.html('Ready to Play'));
-    playButton.mouseOut(() => playButton.html(isPlaying ? 'Pause' : 'Play'));
+    playButton.elt.addEventListener('click', togglePlay);
+    playButton.elt.addEventListener('mouseover', () => playButton.html('Ready to Play'));
+    playButton.elt.addEventListener('mouseout', () => playButton.html(isPlaying ? 'Pause' : 'Play'));
 
     let speedSlider = createSlider(1, 10, noteSpeed, 1);
     speedSlider.position(200, 10);
-    speedSlider.input(() => {
+    speedSlider.elt.addEventListener('input', () => {
         noteSpeed = speedSlider.value();
         console.log(`Note speed changed to: ${noteSpeed}`);
     });
@@ -34,6 +33,7 @@ function setup() {
         timeDisplay.html(`Time: ${currentTime.toFixed(2)}s`);
     }, 1000);
 }
+
 
 function draw() {
     background(0);
